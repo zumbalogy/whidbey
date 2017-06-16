@@ -40,13 +40,19 @@
     puget/common-handlers))
 
 
+(defn prepend-semicolon [rendered-str]
+  (-> rendered-str
+      (clojure.string/replace #"^" "; ")
+      (clojure.string/replace #"\n" "\n;")))
+
 (defn render-str
   "Renders the given value to a display string by pretty-printing it using Puget
   and the configured options."
   [value]
   (-> printer
       (assoc :print-handlers print-handlers)
-      (puget/render-str value)))
+      (puget/render-str value)
+      (prepend-semicolon)))
 
 
 

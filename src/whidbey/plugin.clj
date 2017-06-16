@@ -20,7 +20,7 @@
   "Constructs a profile map for enabling the repl hooks."
   [version options]
   (->
-    `{:dependencies [[mvxcvi/whidbey ~(or version "RELEASE")]]
+    `{:dependencies [[zumbalogy/whidbey ~(or version "RELEASE")]]
       :repl-options {:nrepl-middleware [clojure.tools.nrepl.middleware.render-values/render-values]
                      :nrepl-context {:interactive-eval {:renderer whidbey.repl/render-str}}
                      :init (do (require 'whidbey.repl)
@@ -36,6 +36,6 @@
   (if (:whidbey/repl (:profiles project))
     project
     (let [options (:whidbey project)
-          version (find-plugin-version project 'mvxcvi/whidbey)
+          version (find-plugin-version project 'zumbalogy/whidbey)
           profile (whidbey-profile version options)]
       (project/add-profiles project {:whidbey/repl profile}))))
